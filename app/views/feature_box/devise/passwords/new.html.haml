@@ -1,0 +1,5 @@
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html=>{:method => :post, :class=>" well form-horizontal"}) do |f|
+  %legend Forgot your password?
+  = generate_form_element f,'Email', f.email_field(:email)
+  = generate_form_element f,nil, f.submit("Send me reset password instructions", :class=>"btn btn-primary")
+  = generate_form_element f,nil, render("feature_box/devise/links")

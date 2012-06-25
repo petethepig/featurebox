@@ -1,0 +1,31 @@
+- partial = @suggestion==nil
+.suggestion
+  .vote-box.down-append
+    .vote-frame
+      - votes = suggestion.votes.size
+      .vote-number{:class=>if(votes>9999)then "long" end }= votes
+      %span.votes-label
+        = pluralize(votes, 'vote')[votes.to_s.length+1,20]
+      - if user_signed_in?
+      - votes = suggestion.user_votes(current_user)
+        %div{:class=>"user-votes "+(if votes == 0 then "hidden" else '' end)}="+"+votes.to_s
+    = link_to 'Vote', vote_suggestion_path(suggestion.id), :class=>'vote-btn btn btn-success2 '+(if !user_signed_in? || !(current_user.votes_left>0 && current_user.can_vote?(suggestion)) then "disabled" else '' end),:remote => true
+  .suggestion-info
+    - if (!partial) && can?(:update, suggestion)
+      .pull-right= link_to 'edit', edit_suggestion_path(:id=>suggestion)
+    %h3.title= link_to_if partial, suggestion.title, suggestion
+    .description
+      - if partial then
+        = truncate suggestion.description, :length=>90, :separator => ' '
+      - else
+        = multiline suggestion.description
+    .name-date
+      Suggested by 
+      %strong #{suggestion.user.name} 
+      #{distance_of_time_in_words_to_now(suggestion.created_at)} ago
+    - if partial
+      .comments
+        = link_to pluralize(suggestion.comments.size, 'comment'),suggestion
+    - else
+      .status= if suggestion.status != :default then suggestion.status.to_s.humanize else suggestion.category.name end
+  .clearfix

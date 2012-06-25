@@ -1,0 +1,133 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap.min
+ *= require_tree .
+*/
+
+@import 'mixins.css.scss';
+
+header {
+  padding: 30px 0;
+}
+
+.nav-list{
+  li{
+    a{
+      @include radius(4px);
+    }
+  }.active{
+    a{
+      background: #08C;      
+      @include linear-gradient(#0095E0, #08C);
+      border:1px solid #0095E0;
+      padding:2px 14px;
+    }
+  }
+}
+
+.black-link, .black-link:HOVER{
+  text-decoration:none;
+  color:black;
+}
+
+a.disabled, a.disabled:HOVER{
+  color:  #ccc;
+}
+
+a.danger{
+  color:#f22;
+}
+
+
+.span8-5{
+  width:650px;
+}
+
+.empty{
+  line-height: 27px;
+  font-size: 18px;
+  margin: 40px 0;
+  text-align:center;
+}
+
+.inline{
+  display:inline;
+}
+
+.center{
+  text-align: center;
+}
+
+
+#current-user-wrapper{
+  position:absolute;
+  width:100%;
+  #current-user{
+    height:0;
+    div{
+      padding: 5px 10px;
+    }
+  }
+}
+
+#votes-left{
+  line-height:1.25;
+}
+
+
+.new-btn{
+  text-align:center;
+  margin-top:40px;
+  a{
+    width: 670px;
+  }
+}
+
+#admin-links{
+  display:block;
+}
+
+
+footer .span12{
+  margin-top: 45px;
+  padding: 35px 0 36px;
+  border-top: 1px solid #E5E5E5;
+}
+
+
+.clearfix{
+  clear:both;
+}
+
+.hidden{
+  visibility:hidden;
+}
+
+
+@media(max-width: 970px) { /*for better experience on low resolution displays*/
+  .container{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+//*Categories and Users pages**/
+ul.table-nav{
+  margin:0;
+  padding:0;
+  border-bottom:none;
+  font-weight:normal;
+  margin-bottom:-34px;
+}
+
+table tr td:last-child{
+  text-align:right;
+}

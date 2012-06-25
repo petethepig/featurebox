@@ -1,0 +1,16 @@
+.well
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class=>"form-horizontal" }) do |f|
+    %legend Change Email
+    = generate_form_element f, :name, f.text_field(:name)
+    = generate_form_element f, :email, f.email_field(:email)  
+    = generate_form_element f, :current_password, f.password_field(:current_password)
+    = generate_form_element f, nil, f.submit("Update", :class=>"btn btn-primary")
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class=>"form-horizontal" }) do |f|
+    %legend Change Password
+    = generate_form_element f,'New password', f.password_field(:password, :autocomplete => "off")
+    = generate_form_element f,'Confirmation', f.password_field(:password_confirmation)
+    = generate_form_element f,'Current password', f.password_field(:current_password)
+    = generate_form_element f,nil, f.submit("Update", :class=>"btn btn-primary")
+  = form_for(resource, :url => registration_path(resource_name),:html => {:class=>'form-horizontal', :method=>:delete}) do |f|
+    %legend Cancel my account
+    = generate_form_element f, "This cannot be undone", f.submit("Cancel My Account", :class=>"btn btn-danger")

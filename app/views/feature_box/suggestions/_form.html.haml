@@ -1,0 +1,30 @@
+- if @suggestion.errors.any?
+  .alert.alert-error
+    %h4
+      = pluralize(@suggestion.errors.count, "error")
+      prohibited this suggestion from being saved:
+    %ul
+      - @suggestion.errors.full_messages.each do |msg|
+        %li= msg
+- if @categories.size >1 
+  .well
+    = form_for(@suggestion, :html =>{:class=>'form-horizontal  '}) do |f|
+      %legend= yield :header
+      - clazz="span5"
+      = generate_form_element f, :title, f.text_field(:title, :class=>clazz)
+      = generate_form_element f, :category, f.select(:category_id, options_for_select(@categories.slice(1..9999999).map { |category| [category.name, category.id] } ), :class=>clazz)
+      - if current_user.admin?
+        = generate_form_element f, :status, f.select(:status, options_for_select([["Default", :default], ["In Progress", :in_progress], ["Complete",:complete]]))
+      = generate_form_element f, :description, f.text_area(:description, :class=>clazz,:size => "x5")
+      = generate_form_element f, nil, f.submit(:class=>"btn btn-primary")
+    - if controller.action_name=="edit"
+      = form_for(@suggestion, :html =>{:class=>'form-horizontal  '}) do |f|
+        %legend Deleting suggestion
+        = generate_form_element f, "This cannot be undone", link_to("Delete", @suggestion, :method=>:delete, :class=>"btn btn-danger")
+- else
+  - if current_user.admin?
+    .empty You need to create a category first
+    .new-btn
+      = link_to 'New Category', new_category_path, :class=>"btn btn-large"
+  - else 
+    .empty Tell administrator, that he needs to create a category first

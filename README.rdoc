@@ -1,0 +1,118 @@
+= FeatureBox
+
+FeatureBox is a feature request service written using Ruby on Rails framework.
+It is an open source analog of VoteBox[http://www.dropbox.com/votebox] - part of the DropBox
+
+It uses popular gems like *CanCan* and *Devise* and designed to be flexible and customizable.
+If you already use these gems in your web applications it becomes very easy to integrate them with FeatureBox.
+
+Take a look at the demo here: http://featurebox.me
+
+== Installation
+===Basic steps
+
+Edit your *Gemfile* to add a dependency on the feature_box gem.
+  gem 'feature_box'
+
+Update dependencies 
+  bundle update
+
+Before moving any further you will need to choose the right generator.
+There are two of them: one for existing app and one for standalone installation.
+
+The main difference is that standalone generator creates a new User model, installs and configures *Devise*. It is meant to run on a clean rails app and that's why it is called standalone. Use this generator to test FeatureBox or if your application doesn't have any User models.
+
+If you installing FeatureBox on existing app you might want to keep existing users and this is situation when you have to use generator for existing application.
+
+
+=== Standalone
+This will create User model, install Devise, run migrations and everything.
+
+Create a new Rails App if you haven't done this yet.
+  rails new standalone
+
+Delete that default index page, I suppose you don't need it.
+  rm public/index.html
+
+Perform basic steps from above.
+
+Install FeatureBox:
+  rails g feature_box:standalone
+
+
+=== Existing Application
+Make sure you have User model in your application.
+Install Devise on it if you haven't done this yet.
+
+Install FeatureBox with just one command:
+  rails g feature_box:existing
+
+If you don't want to rely on this smart generator script, check Manual Installation part.
+
+
+=== Manual Installation
+
+==== Initializer
+Use this generator to create a new +config/initializers/feature_box.rb+ file
+  rails g feature_box:initializer
+
+==== Routes
+Routing is really easy:
+  mount FeatureBox::Engine => '/any_path'
+
+*Important!*
+In case you already use Devise in your app you have to set *devise_router_name* to *:main_app* in the initializer:
+  settings.devise_router_name = :main_app
+
+==== Migrations and Models
+To generate migrations use generator
+  rails g feature_box:migrations
+
+Here is a list of avaliable migrations:
+* 00_create_feature_box_suggestions.rb
+* 01_create_feature_box_categories.rb
+* 02_create_feature_box_comments.rb
+* 03_create_feature_box_votes.rb
+* 04_create_feature_box_users.rb
+* 05_add_devise_to_feature_box_users.rb
+* 06_add_type_to_users.rb
+
+In any case you will need to install migrations 00..03 
+
+Install migrations 04 and 05 if you don't have User model. This is what "standalone" generator does.
+
+Install migration 06 if you already have a User model in your app. This will add :type column to the model and this is important because Rails STI doesn't work without this trick.
+
+*Important!* Make sure you have this line in the initializer:
+  settings.devise_parent_model = "User"
+
+Install migrations like you always do:
+  rake db:migrate
+
+
+== Other Things You May Want To Install
+=== Views
+Use this generator to copy views to your app so you can easily edit them:
+  rails g feature_box:views
+
+=== ActionMailer Configuration
+It is pretty simple and basically the same as with any other Rails App.
+More info coming soon. 
+
+
+== TODOs
+* Correct spelling mistakes. I am not a native speaker and it is really hard for me. Conribute, please.
+* Make it work with different model names, like +Person+ or +Account+.
+* AJAX Support
+
+
+== Contribution
+I invite everyone who wants to help me with this project.
+
+Share your ideas and thoughts here: http://featurebox.me.
+
+Issues Tracker is available here: http://github.com/petethepig/featurebox/issues.
+
+
+== License
+MIT License. Copyright 2012 {Dmitry Filimonov}[http://dfilimonov.com].

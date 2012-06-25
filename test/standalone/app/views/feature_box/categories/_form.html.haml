@@ -1,0 +1,14 @@
+- if @category.errors.any?
+  .alert.alert-error
+    %h4
+      = pluralize(@category.errors.count, "error")
+      prohibited this category from being saved:
+    %ul
+      - @category.errors.full_messages.each do |msg|
+        %li= msg
+.well
+  = form_for(@category, :html =>{:class=>'form-horizontal  '}) do |f|
+    %legend= yield :header
+    - clazz="span5"
+    = generate_form_element f, :name, f.text_field(:name, :class=>clazz)
+    = generate_form_element f, nil, f.submit(:class=>"btn btn-primary")

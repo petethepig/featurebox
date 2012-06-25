@@ -1,0 +1,6 @@
+- if current_user.votes_left > 0
+  - content_for :header do
+    New suggestion
+  = render 'form'
+- else
+  .empty You need at least one vote to add suggestions

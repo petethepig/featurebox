@@ -1,0 +1,9 @@
+- if user_signed_in? then
+  = form_for([@suggestion,c],:html =>{:class=>' well'}) do |f|
+    = generate_form_element( f, "Your comment:", f.text_area(:text,:size=>"10x5",:class=>"span8-5").gsub("&#x000A;",""))
+    .pull-right.new-comment
+      = generate_form_element f, nil, f.submit(:class=>"btn btn-primary ")
+    .clearfix
+- else
+  .center.alert.alert-info
+    = link_to "Sign in to comment", new_user_session_path

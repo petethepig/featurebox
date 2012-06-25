@@ -1,0 +1,9 @@
+.comment
+  .comment-date
+    = distance_of_time_in_words_to_now(comment.created_at)
+    ago
+    .comment-edit
+      - if can?(:update, comment) || can?(:destroy, comment)
+        = link_to "edit", edit_suggestion_comment_path(comment.suggestion,comment) 
+  .comment-user= comment.user.name
+  .comment-text= multiline comment.text

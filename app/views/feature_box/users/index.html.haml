@@ -1,0 +1,25 @@
+.dd
+  %ul.nav.nav-tabs.table-nav
+    = render "feature_box/shared/pages_nav"
+#categories
+  - if @users.empty?
+    %div.empty Nothing found
+  - else
+    %table.table.table-striped
+      %thead
+        %tr
+          %th  
+          %th User name
+          %th Number of suggestions
+          %th
+          %th
+      %tbody
+        - n = @offset
+        - @users.each do |user|
+          %tr
+            %td= n+=1
+            %td= user.name 
+            %td= user.suggestions.size
+            %td= link_to "edit", edit_user_path(user)
+            %td= link_to "delete", user, :confirm => 'Are you sure? This will delete ALL suggestions with user '+user.name, :method=>"delete", :class=>"link danger" 
+  
