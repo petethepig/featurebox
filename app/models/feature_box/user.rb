@@ -11,13 +11,14 @@ module FeatureBox
     attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
     def can_vote? suggestion
-      if !Settings.can_vote_own_suggestions || votes_left > 0
+        logger.info "test"
+      if !Settings.can_vote_own_suggestions && suggestion.user == self
         return false
       end
-      if votes_left < 0 then 
+      if votes_left <= 0 then 
         return false
       end
-      if Settings.per_suggestion_limit < 0
+      if Settings.per_suggestion_limit == -1
         return true 
       else 
         return Vote.where(:user_id => id, :suggestion_id=>suggestion.id).size < Settings.per_suggestion_limit
@@ -25,7 +26,7 @@ module FeatureBox
     end
 
     def votes_left 
-      if Settings.total_limit < 0 then 
+      if Settings.total_limit == -1 then 
         return 100
       end 
       condition = Settings.time_limit.ago
