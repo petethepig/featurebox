@@ -11,7 +11,7 @@ module FeatureBox
     attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
     def can_vote? suggestion
-      if !Settings.can_vote_own_suggestions || votes_left <= 0
+      if !Settings.can_vote_own_suggestions || votes_left > 0
         return false
       end
       if votes_left < 0 then 
