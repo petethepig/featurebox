@@ -1,7 +1,0 @@
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html=>{:method => :put, :class=>" well form-horizontal"}) do |f|
-  = f.hidden_field :reset_password_token
-  %legend Change your password
-  = generate_form_element f,'Password', f.password_field(:password)
-  = generate_form_element f,'Password confirmation', f.password_field(:password_confirmation)
-  = generate_form_element f,nil, f.submit("Change my password", :class=>"btn btn-primary")
-  = generate_form_element f,nil, render("feature_box/devise/links")

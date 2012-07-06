@@ -1,8 +1,0 @@
-%ul#comments-nav.nav.nav-tabs
-  = render :partial => "feature_box/shared/pages_nav"
-#comments
-  - @comments.each do |comment|
-    = render comment
-  - if @comments.empty?
-    .empty No comments here yet. Write one
-= render :partial =>'feature_box/comments/new', :locals => {:c=>FeatureBox::Comment.new}

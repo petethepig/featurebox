@@ -1,6 +1,0 @@
-%li{:style => "float:right"}
-  = link_to_if(@current_page<@last_page, "next", {:page=>@current_page+1}) do
-    %a.disabled next
-%li{:style => "float:right"}
-  = link_to_if(@current_page > 1, "previous", {:page=>@current_page-1}) do
-    %a.disabled previous

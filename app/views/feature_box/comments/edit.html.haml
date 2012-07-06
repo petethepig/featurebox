@@ -11,5 +11,7 @@
     %legend Editing comment
     = generate_form_element( f, nil, f.text_area(:text,:size=>"10x5",:class=>"span8-5"))
     .pull-right.new-comment
-      = generate_form_element f, nil, f.submit(:class=>"btn btn-primary ")
+      = f.submit(:class=>"btn btn-primary ")
+      = link_to("Delete", suggestion_comment_path(@comment.suggestion, @comment), :method=>:delete, :class=>"btn btn-danger", :confirm => 'Are you sure?')
     .clearfix
+    

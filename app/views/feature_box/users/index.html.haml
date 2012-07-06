@@ -22,4 +22,3 @@
             %td= user.suggestions.size
             %td= link_to "edit", edit_user_path(user)
             %td= link_to "delete", user, :confirm => 'Are you sure? This will delete ALL suggestions with user '+user.name, :method=>"delete", :class=>"link danger" 
-  

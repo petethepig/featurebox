@@ -1,7 +1,0 @@
-%h2 Resend confirmation instructions
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class=>"form-horizontal well" }) do |f|
-  .alert.alert-error
-    = devise_error_messages!
-  = generate_form_element f,'Your name', f.email_field(:email)
-  = generate_form_element f,nil, f.submit("Resend confirmation instructions", :class=>"btn btn-primary")
-= render "links"

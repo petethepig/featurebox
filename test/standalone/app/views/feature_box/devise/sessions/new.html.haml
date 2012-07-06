@@ -1,8 +1,0 @@
-= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html=>{:class=>" well form-horizontal"}) do |f|
-  %legend Sign in
-  = generate_form_element f,'Email', f.email_field(:email)
-  = generate_form_element f,'Password', f.password_field(:password)
-  - if devise_mapping.rememberable?
-    = generate_form_element f, nil, '<label class="checkbox">'+f.check_box(:remember_me)+"Remember me</label>"
-  = generate_form_element f,nil, f.submit("Sign in", :class=>"btn btn-primary")
-  = generate_form_element f,nil, render("feature_box/devise/links")
