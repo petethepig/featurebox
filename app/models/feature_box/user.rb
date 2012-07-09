@@ -11,7 +11,6 @@ module FeatureBox
     attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
     def can_vote? suggestion
-        logger.info "test"
       if !Settings.can_vote_own_suggestions && suggestion.user == self
         return false
       end

@@ -1,9 +1,11 @@
 require 'find'
 module FeatureBox
   module Generators
-    # Various helper methods
+    # Helper methods
     module GeneratorBase
+      
       include Rails::Generators::Migration
+      
       module ClassMethods
         def next_migration_number(path)
           unless @prev_migration_nr
@@ -14,20 +16,19 @@ module FeatureBox
           @prev_migration_nr.to_s
         end
       end
+
       def self.included clazz 
         clazz.source_root File.expand_path("../templates", __FILE__)
         clazz.extend include Rails::Generators::Migration::ClassMethods
         clazz.extend ClassMethods
       end
-      
-      
 
       def copy_migrations patterns
+        model_name = @model_name || "User"
         Find.find(File.expand_path("../templates/migrations", __FILE__)) do |path|
           patterns.each do |pattern|
             if pattern.match(path)
-              puts path
-              migration_template path, 'db/migrate/'+(File.basename(path,".rb"))[3..-1]
+              migration_template path, 'db/migrate/'+(File.basename(path,".rb"))[3..-1].gsub(/{model_name}/,model_name.tableize.gsub(/\//,''))
             end
           end
         end

@@ -83,7 +83,6 @@ module FeatureBox
       user    = hash[:user]
       limit   = hash[:limit]
       offset  = hash[:offset]
-
       case type_of_impact
         when :suggestions
           suggestions = user.suggestions.order("created_at DESC").limit(limit).offset(offset)

@@ -135,7 +135,7 @@ module FeatureBox
       authorize! :read_protected, Suggestion    
 
       pages_helper do |limit, offset|
-        @suggestions, @total = Suggestion.find_my type_of_impact, :user => @current_user, :limit => limit, :offset => offset
+        @suggestions, @total = Suggestion.find_my type_of_impact, :user => current_user, :limit => limit, :offset => offset
       end
 
       @show_nav_bar=true

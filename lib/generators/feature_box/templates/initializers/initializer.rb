@@ -26,7 +26,7 @@ FeatureBox::Settings.setup do |settings|
   # settings.mailer = "Devise::Mailer"
 
 
-  <%= if @has_devise then 'settings.devise_parent_model = "User"' end %>
+  <%= if @has_devise then 'settings.devise_parent_model = "'+@model_name+'"' end %>
   <%= if @has_devise then 'settings.devise_router_name = :main_app' end %>
 
 end

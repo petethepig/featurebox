@@ -21,13 +21,6 @@ module FeatureBox
           return say "Wrong format"
         end      
       end
-
-      private 
-      def copy_migration n
-        n = n.to_s
-        n = "0"+n if n.length < 2
-        copy_migrations [Regexp.new("#{n}_.*")]
-      end
     end
   end
 end

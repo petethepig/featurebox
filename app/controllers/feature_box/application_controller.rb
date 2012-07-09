@@ -30,6 +30,8 @@ module FeatureBox
       @categories = Array [Category.default] + Category.all    
     end
 
+    include FeatureBox::Helpers
+
   end
 end
 

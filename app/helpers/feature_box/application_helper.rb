@@ -27,7 +27,14 @@ module FeatureBox
     end
 
     def devise_router_name
-      send(FeatureBox::Settings.devise_router_name)
+      if controller.class.name =~ /FeatureBox::Devise/
+        feature_box
+      else
+        self
+      end
     end
+
+    include FeatureBox::Helpers
+
   end
 end

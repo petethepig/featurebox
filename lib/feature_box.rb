@@ -1,4 +1,5 @@
 require 'feature_box/engine'
+require 'feature_box/helpers'
 require 'devise'
 require 'cancan'
 require 'cancan/ability'
