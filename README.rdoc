@@ -3,8 +3,8 @@
 FeatureBox is a feature request service written using Ruby on Rails framework.
 It is an open source analog of VoteBox[http://www.dropbox.com/votebox] - part of the DropBox
 
-It uses popular gems like *CanCan* and *Devise* and designed to be flexible and customizable.
-If you already use these gems in your web applications it becomes very easy to integrate them with FeatureBox.
+It is designed to be flexible and customizable and intended to be easily integrated into your website.
+It uses popular gems like *CanCan* and *Devise*.
 
 Take a look at the demo here: http://featurebox.me
 
@@ -18,33 +18,24 @@ Update dependencies
   bundle update
 
 Before moving any further you will need to choose the right generator.
-There are two of them: one for existing app and one for standalone installation.
+There are two of them: one for *existing* app and one for *standalone* installation.
 
-The main difference is that standalone generator creates a new User model, installs and configures *Devise*. It is meant to run on a clean rails app and that's why it is called standalone. Use this generator to test FeatureBox or if your application doesn't have any User models.
+The main difference is that standalone generator creates a new User model, installs and configures Devise. It is meant to run on a clean rails app and that's why it is called standalone. Use this generator to test FeatureBox or if your application doesn't have any User model.
 
 If you installing FeatureBox on existing app you might want to keep existing users and this is situation when you have to use generator for existing application.
 
 
 === Standalone
-This will create User model, install Devise, run migrations and everything.
+One simple command will create User model, install Devise, run migrations and everything.
 
-Create a new Rails App if you haven't done this yet.
-  rails new standalone
-
-Delete that default index page, I suppose you don't need it.
-  rm public/index.html
-
-Perform basic steps from above.
-
-Install FeatureBox:
   rails g feature_box:standalone
 
 
 === Existing Application
 Make sure you have User model in your application.
-Install Devise on it if you haven't done this yet.
+Install Devise on if you haven't done this yet.
 
-Install FeatureBox with just one command:
+Then install FeatureBox with just one command:
   rails g feature_box:existing
 
 If you don't want to rely on this smart generator script, check Manual Installation part.
@@ -53,19 +44,15 @@ If you don't want to rely on this smart generator script, check Manual Installat
 === Manual Installation
 
 ==== Initializer
-Use this generator to create a new +config/initializers/feature_box.rb+ file
+Use this generator to create a new initializer in +config/initializers/feature_box.rb+
   rails g feature_box:initializer
 
 ==== Routes
 Routing is really easy:
   mount FeatureBox::Engine => '/any_path'
 
-*Important!*
-In case you already use Devise in your app you have to set *devise_router_name* to *:main_app* in the initializer:
-  settings.devise_router_name = :main_app
-
-==== Migrations and Models
-To generate migrations use generator
+==== Migrations
+FeatureBox has a generator for this:
   rails g feature_box:migrations
 
 Here is a list of avaliable migrations:
@@ -75,20 +62,22 @@ Here is a list of avaliable migrations:
 * 03_create_feature_box_votes.rb
 * 04_create_feature_box_users.rb
 * 05_add_devise_to_feature_box_users.rb
-* 06_add_type_to_users.rb
+* 06_add_type_to_{model_name}.rb
 
-In any case you will need to install migrations 00..03 
+Migrations 00..03 are a must.
 
-Install migrations 04 and 05 if you don't have User model. This is what "standalone" generator does.
+Install migrations 04 and 05 if you don't have User model. This is what *standalone* generator does.
 
-Install migration 06 if you already have a User model in your app. This will add :type column to the model and this is important because Rails STI doesn't work without this trick.
+Install migration 06 if you already have a User model in your app. This will add +:type+ column to the model and this is important because Rails STI doesn't work without this trick. Generator will also ask you for a model name in case it is not User.
 
-*Important!* Make sure you have this line in the initializer:
-  settings.devise_parent_model = "User"
-
-Install migrations like you always do:
+Run migrations like you always do:
   rake db:migrate
 
+==== Tweaking Initializer
+In case you already use Devise in your app you have to set *devise_router_name* to *:main_app* in the initializer:
+  settings.devise_router_name = :main_app
+Make sure you have this line in the initializer:
+  settings.devise_parent_model = "User"
 
 == Other Things You May Want To Install
 === Views
@@ -102,8 +91,8 @@ More info coming soon.
 
 == TODOs
 * Correct spelling mistakes. I am not a native speaker and it is really hard for me. Conribute, please.
-* Make it work with different model names, like +Person+ or +Account+.
-* AJAX Support
+* Test coverage. It is really poor at the moment.
+* AJAX
 
 
 == Contribution

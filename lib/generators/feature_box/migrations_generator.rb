@@ -6,7 +6,8 @@ module FeatureBox
       desc "Installs migrations"
       def copy_migrations_task
         
-        @users_table_name = ask("What is the User model name? [User]") || "User"
+        @model_name = ask("What is the User model name? [User]")
+        @model_name = "User" if @model_name.empty?
         
         migrations = eval ask("Enter migration number or range. '05' or '00..04':");
         if migrations.class == Fixnum
@@ -15,8 +16,6 @@ module FeatureBox
           migrations.each do |m|
             copy_migration m
           end
-        elsif migrations.class == String && migrations == 'q'
-          return say "Done"
         else 
           return say "Wrong format"
         end      
