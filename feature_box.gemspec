@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Dmitry Filimonov"]
   s.email       = ["me@dfilimonov.com"]
   s.homepage    = "http://featurebox.me/"
-  s.summary     = "Flexible feature request service."
-  s.description = "Flexible feature request service."
+  s.summary     = "Feature request service."
+  s.description = "FeatureBox is a feature request service written using Ruby on Rails framework. It is an open source analog of VoteBox - part of the DropBox. It is designed to be flexible and customizable and intended to be easily integrated into your website. It uses popular gems like CanCan and Devise."
 
   s.require_paths = ['lib']
 
