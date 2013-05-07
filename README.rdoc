@@ -15,7 +15,7 @@ Edit your *Gemfile* to add a dependency on the feature_box gem.
   gem 'feature_box'
 
 Update dependencies 
-  bundle update
+  bundle install
 
 Before moving any further you will need to choose the right generator.
 There are two of them: one for *existing* app and one for *standalone* installation.
